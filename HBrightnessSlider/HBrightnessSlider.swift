@@ -70,6 +70,11 @@ public class HBrightnessSlider: UIControl {
     
     private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
     
+    private var longRecognizer: LongGesture?
+    //    {
+    //        return LongGesture(target: self, action: #selector(HBrightnessSlider.handleLongGesture(_:)))
+    //    }
+    
     private var didVibrate = false
     
     private var startValue: CGFloat {
@@ -127,18 +132,25 @@ public class HBrightnessSlider: UIControl {
     /// Adds the value text layer.
     fileprivate func addTextLayer() {
         if showText {
+            
             renderer.textColor = textColor
             layer.addSublayer(renderer.textLayer)
+        } else {
+            renderer.textLayer.removeFromSuperlayer()
         }
     }
     
-    /// Adds long press gesture.
+    /// Adds/Remove long press gesture.
     fileprivate func addLognPressGesture() {
         if shouldScale {
-            let longRecognizer = LongGesture(target: self, action: #selector(HBrightnessSlider.handleLongGesture(_:)))
-            longRecognizer.delegate = self
-            longRecognizer.minimumPressDuration = scaleDelay
-            addGestureRecognizer(longRecognizer)
+            longRecognizer = LongGesture(target: self, action: #selector(HBrightnessSlider.handleLongGesture(_:)))
+            longRecognizer?.delegate = self
+            longRecognizer?.minimumPressDuration = scaleDelay
+            addGestureRecognizer(longRecognizer!)
+        } else {
+            if let g = longRecognizer {
+                removeGestureRecognizer(g)
+            }
         }
     }
     
@@ -292,7 +304,7 @@ private class HorizontalSliderRenderer {
     
     let trackLayer = CAShapeLayer()
     let fillingLayer = CAShapeLayer()
-    let textLayer = CATextLayer()
+    var textLayer = CATextLayer()
     
     init() {
         trackLayer.fillColor = backgroundColor.cgColor
