@@ -211,7 +211,7 @@ public class HBrightnessSlider: UIControl {
     /// - Parameters:
     ///   - newValue: Value in Float
     ///   - animated: State whether to animate or not. Default `false`.
-    func setValue(_ newValue: Float, animated: Bool = false) {
+    public func setValue(_ newValue: Float, animated: Bool = false) {
         value = ((maximumValue - minimumValue) * newValue) + minimumValue
         delegate?.valueChangedContinuesly(value: value)
         let angleValue = endValue * CGFloat(newValue)
@@ -221,7 +221,7 @@ public class HBrightnessSlider: UIControl {
     /// The value to show in the slider. Pass any value that can be converted in to String.
     ///
     /// - Parameter value: Value in strings
-    func showValue(_ value: String?) {
+    public func showValue(_ value: String?) {
         renderer.updateTextValue(value)
     }
     
