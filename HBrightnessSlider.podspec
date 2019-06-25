@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   # ―――----------------------------------――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "10.0"
 
   s.ios.vendored_frameworks = 'HBrightnessSlider.framework'
 
