@@ -1,0 +1,11 @@
+framework module HBrightnessSlider {
+  umbrella header "HBrightnessSlider.h"
+
+  export *
+  module * { export * }
+}
+
+module HBrightnessSlider.Swift {
+    header "HBrightnessSlider-Swift.h"
+    requires objc
+}
